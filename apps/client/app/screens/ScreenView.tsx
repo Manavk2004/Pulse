@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect } from 'react'
-import LoginPage from './LoginPage/LoginPage'
+import LoginPage from './login/page'
 import { usePathname } from "next/navigation"
 
 const screens: Record<string, React.ReactNode> = {
