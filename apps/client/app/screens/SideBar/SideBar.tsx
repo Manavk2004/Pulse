@@ -6,12 +6,12 @@ import {
   MenubarSeparator,
   MenubarShortcut,
   MenubarTrigger,
-} from "../../components/ui/menubar"
+} from "../../../components/ui/menubar"
 
 
 import React from 'react'
 
-function NavBar() {
+function SideBar() {
   return (
     <Menubar>
         <MenubarMenu>
@@ -31,4 +31,4 @@ function NavBar() {
   )
 }
 
-export default NavBar
+export default SideBar

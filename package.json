@@ -9,11 +9,15 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "cn": "^0.1.1",
     "concurrently": "^9.2.1",
     "convex": "^1.28.0",
+    "jotai": "^2.15.0",
     "prettier": "^3.6.2",
+    "react-hook-form": "^7.65.0",
     "turbo": "^2.5.8",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "zod": "^4.1.12"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {

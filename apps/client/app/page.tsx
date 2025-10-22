@@ -1,11 +1,7 @@
-
-import NavBar from "./views/NavBar";
-
-
 export default function Home() {
   return(
     <>
-      <NavBar />
+      <h1>Bye</h1>
     </>
   )
 }
