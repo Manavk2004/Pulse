@@ -10,6 +10,7 @@ import {
 import { Geist, Geist_Mono } from 'next/font/google';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from '@/components/ui/app-sidebar';
+import { BackgroundProvider } from "../components/BackgroundProvider"
 
 import './globals.css'
 
@@ -33,21 +34,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
   return (
-    <ClerkProvider>
-      <html lang='en' className='bg-gray-800/20'>
-        <body>
-          <SidebarProvider>
-            <div className='flex w-full'>
-              <AppSidebar />
-              <main className='flex-1 p-4'>
+        <ClerkProvider>
+          <html lang='en' className='bg-gray-800/20'>
+            <body>
+              <BackgroundProvider>
                 {children}
-              </main>
-            </div>
-            <SidebarTrigger />
-          </SidebarProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+              </BackgroundProvider>
+            </body>
+          </html>
+        </ClerkProvider>
   )
 }

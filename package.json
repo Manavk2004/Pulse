@@ -9,9 +9,11 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "@gsap/react": "^2.1.2",
     "cn": "^0.1.1",
     "concurrently": "^9.2.1",
     "convex": "^1.28.0",
+    "gsap": "^3.13.0",
     "jotai": "^2.15.0",
     "prettier": "^3.6.2",
     "react-hook-form": "^7.65.0",

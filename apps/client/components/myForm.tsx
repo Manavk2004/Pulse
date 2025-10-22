@@ -1,6 +1,7 @@
 "use client"
 
 import { z } from "zod"
+import { useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "./ui/button"
@@ -16,6 +17,11 @@ import {
 import { Input } from "./ui/input"
 import { Monda, Inter } from "next/font/google"
 import { cn } from "@/lib/utils"
+import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
+
+
+gsap.registerPlugin(useGSAP)
 
 const sans = Inter({
     subsets: ['latin'],
@@ -23,13 +29,16 @@ const sans = Inter({
 })
 
 const formSchema = z.object({
-    username: z.string().min(2, {
-        message: "Username must be atleast 2 characters"
+    username: z.string().min(8, {
+        message: "⚠️ Username must be at least 8 characters"
     })
 })
 
 
+
 export function ProfileForm(){
+
+    const buttonRef = useRef(null)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -37,10 +46,13 @@ export function ProfileForm(){
             username: "",
         }
     })
-
+    
     function onSubmit(values: z.infer<typeof formSchema>){
         console.log(values)
     }
+
+
+
 
 
     return (
@@ -53,16 +65,14 @@ export function ProfileForm(){
                         <FormItem className={cn(sans.className)}>
                             <FormLabel>Username</FormLabel>
                             <FormControl>
-                                <Input placeholder="shadcn" {...field} />
+                                <Input placeholder="manav__kamdar" {...field} />
                             </FormControl>
-                            <FormDescription>
-                                This is your profile display name
-                            </FormDescription>
+        
                             <FormMessage />
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="bg-gray-600/70 w-full cursor-pointer">Submit</Button>
+                <Button type="submit" className={cn("bg-gray-600/70 w-full cursor-pointer")}>Submit</Button>
             </form>
         </Form>
     )

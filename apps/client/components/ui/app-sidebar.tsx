@@ -16,7 +16,11 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { usePathname } from "next/navigation"
+import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
 
+
+gsap.registerPlugin(useGSAP)
 
 
 // Menu items.
@@ -54,6 +58,8 @@ export function AppSidebar() {
   const [ selected, setSelected ] = useState<string>("")
   const pathname = usePathname()
 
+
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -64,7 +70,7 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem onClick={() => setSelected(item.title)} key={item.title} className={
                   cn("mb-7  rounded-sm", 
-                    selected === item.title ? " bg-[#6c47ff]/70" : null, selected === item.title ? "border-[#6c47ff]" : null, pathname === "/login" ? "bg-gray-500/20" : null
+                    selected === item.title ? " bg-[#6c47ff]/70" : null, selected === item.title ? "border-[#6c47ff]" : null, pathname === "/login" ? "bg-gray-500/20" : null,
                   )}
                 >
                   <SidebarMenuButton asChild>
