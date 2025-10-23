@@ -11,6 +11,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from '@/components/ui/app-sidebar';
 import { BackgroundProvider } from "../components/BackgroundProvider"
+import { ConvexClientProvider } from './ConvexClientProvider';
 
 import './globals.css'
 
@@ -39,9 +40,11 @@ export default function RootLayout({
         <ClerkProvider>
           <html lang='en' className='bg-gray-800/20'>
             <body>
-              <BackgroundProvider>
-                {children}
-              </BackgroundProvider>
+              <ConvexClientProvider>
+                <BackgroundProvider>
+                  {children}
+                </BackgroundProvider>
+              </ConvexClientProvider>
             </body>
           </html>
         </ClerkProvider>

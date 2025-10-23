@@ -19,11 +19,14 @@ import { Monda, Inter } from "next/font/google"
 import { cn } from "@/lib/utils"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
-
-
+import { useMutation } from "convex/react"
+import { api } from "../../../packages/backend/convex/_generated/api"
+import { userId } from "@/app/atoms/atom"
+import { useAtom } from "jotai"
+import { User } from "lucide-react"
 gsap.registerPlugin(useGSAP)
 
-const sans = Inter({
+const inter = Inter({
     subsets: ['latin'],
     variable: '--font-inter'
 })
@@ -38,7 +41,13 @@ const formSchema = z.object({
 
 export function ProfileForm(){
 
+    const [ userIds, setUserIds ] = useAtom<string>(userId)
+
+    const addUser = useMutation(api.user.add)
+
     const buttonRef = useRef(null)
+
+    const [ userName, setUserName ] = useState<string>("")
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -47,8 +56,11 @@ export function ProfileForm(){
         }
     })
     
-    function onSubmit(values: z.infer<typeof formSchema>){
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof formSchema>){
+        await addUser({
+            username: values.username,
+            id: userIds
+        }) 
     }
 
 
@@ -62,7 +74,7 @@ export function ProfileForm(){
                     control={form.control}
                     name="username"
                     render={({ field }) => (
-                        <FormItem className={cn(sans.className)}>
+                        <FormItem className={cn(inter.className)}>
                             <FormLabel>Username</FormLabel>
                             <FormControl>
                                 <Input placeholder="manav__kamdar" {...field} />
@@ -72,7 +84,7 @@ export function ProfileForm(){
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className={cn("bg-gray-600/70 w-full cursor-pointer")}>Submit</Button>
+                <Button type="submit" className={cn("bg-gray-500/20 w-full cursor-pointer hover:text-[#6c47ff]", inter.className)}>Submit</Button>
             </form>
         </Form>
     )

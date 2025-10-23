@@ -16,6 +16,7 @@
     "gsap": "^3.13.0",
     "jotai": "^2.15.0",
     "prettier": "^3.6.2",
+    "react": "^19.1.0",
     "react-hook-form": "^7.65.0",
     "turbo": "^2.5.8",
     "typescript": "5.9.2",

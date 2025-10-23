@@ -12,7 +12,11 @@ import { useGSAP } from "@gsap/react"
 import { useRef } from 'react'
 import { OrgId } from '@/app/(auth)/orgId'
 import { useUser } from '@clerk/nextjs'
-import { SignOutButton } from '@clerk/nextjs'
+import { useMutation } from 'convex/react'
+import { api } from '@@/packages/backend/convex/_generated/api'
+import { useSetAtom, useAtom } from 'jotai'
+import { userId } from '@/app/atoms/atom'
+
 
 gsap.registerPlugin(useGSAP)
 
@@ -34,7 +38,15 @@ function LoginPage() {
   })
 
   const user = useUser()
-  console.log("Here is the user", user)
+  const setUserId = useSetAtom(userId)
+  if(user && typeof user?.user?.id === "string"){
+    const theUser = user?.user?.id
+    setUserId(theUser)
+    console.log("The userId Atom", userId)
+  }else{
+    console.log("No user string")
+  }
+  console.log("User from login pagetsx", user?.user?.id, typeof(user?.user?.id))
 
 
 
@@ -43,11 +55,6 @@ function LoginPage() {
       <div className='w-full h-full flex justify-center items-center flex-col gap-15'>
         <h1 ref={titleRef} className={cn(monda.className, 'text-5xl')}>Pulse</h1>
         <ProfileForm />
-        <SignOutButton redirectUrl='/sign-in'>
-          <button>
-            Log Out
-          </button>
-        </SignOutButton>
       </div>
     </>
   )
