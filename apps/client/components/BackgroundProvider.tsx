@@ -15,7 +15,7 @@ export function BackgroundProvider({children}: Props) {
     const path = usePathname()
 
     return (
-        path === "/login" ? (
+        path === "/login" || path.startsWith("/homepage") ? (
             <SidebarProvider>
                 <div className='flex w-full'>
                     <AppSidebar />

@@ -19,11 +19,16 @@ import { Monda, Inter } from "next/font/google"
 import { cn } from "@/lib/utils"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
-import { useMutation } from "convex/react"
+import { useMutation, useQuery } from "convex/react"
 import { api } from "../../../packages/backend/convex/_generated/api"
 import { userId } from "@/app/atoms/atom"
-import { useAtom } from "jotai"
+import { useAtom, useSetAtom } from "jotai"
 import { User } from "lucide-react"
+import { redirect } from "next/navigation"
+import { theUserName } from "@/app/atoms/atom"
+import { useConvex } from "convex/react"
+
+
 gsap.registerPlugin(useGSAP)
 
 const inter = Inter({
@@ -44,6 +49,8 @@ export function ProfileForm(){
     const [ userIds, setUserIds ] = useAtom<string>(userId)
 
     const addUser = useMutation(api.user.add)
+    const convex = useConvex()
+    const changeUserName = useSetAtom(theUserName)
 
     const buttonRef = useRef(null)
 
@@ -57,10 +64,17 @@ export function ProfileForm(){
     })
     
     async function onSubmit(values: z.infer<typeof formSchema>){
+        changeUserName(values.username)
         await addUser({
             username: values.username,
             id: userIds
         }) 
+        const userId = await convex.query(api.user.getId, { username: values.username })
+        const id = userId?._id
+
+        redirect(`/homepage/${id}`)
+
+
     }
 
 

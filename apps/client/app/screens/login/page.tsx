@@ -42,11 +42,9 @@ function LoginPage() {
   if(user && typeof user?.user?.id === "string"){
     const theUser = user?.user?.id
     setUserId(theUser)
-    console.log("The userId Atom", userId)
   }else{
     console.log("No user string")
   }
-  console.log("User from login pagetsx", user?.user?.id, typeof(user?.user?.id))
 
 
 

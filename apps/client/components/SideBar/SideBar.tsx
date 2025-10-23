@@ -6,7 +6,7 @@ import {
   MenubarSeparator,
   MenubarShortcut,
   MenubarTrigger,
-} from "../../../components/ui/menubar"
+} from "../ui/menubar"
 
 
 import React from 'react'
